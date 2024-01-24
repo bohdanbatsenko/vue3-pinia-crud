@@ -58,7 +58,7 @@ export const useTaskStore =  defineStore('taskStore', {
     },
     async addTask(task){
       this.tasks.push(task)
-      //localStorage.setItem('tasks', JSON.stringify(this.tasks))
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
       const res = await fetch('http://localhost:3000/tasks', {
           method: 'POST',
           body: JSON.stringify(task),

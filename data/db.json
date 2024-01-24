@@ -6,7 +6,8 @@
     },
     {
       "title": "some t",
-      "id": 9591
+      "id": 9591,
+      "isFav": false
     },
     {
       "title": "new task 02",
@@ -67,10 +68,8 @@
       "isEdit": false
     },
     {
-      "title": "Task 13",
-      "isFav": true,
-      "id": 2106,
-      "isEdit": false
+      "title": "Task 13 -edit 1",
+      "id": 2106
     }
   ]
 }
