@@ -153,8 +153,8 @@ p.invalid {
   color: red;
 }
 
-.pagination-wrapper {
-
+.pagination-wrapper .page-item.active-page{
+  background:#ffd859;
 }
 .actions-wrapper {
   width: 640px;
