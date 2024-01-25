@@ -3,32 +3,30 @@ import {ref} from 'vue';
 import Header from '../components/Header.vue';
 import TaskForm from '../components/TaskForm.vue';
 import TaskDetails from '../components/TaskDetails.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
 import { useTaskStore } from '../stores/TaskStore';
 import { storeToRefs } from 'pinia';
+import { usePagination } from "../composables/usePagination";
 
 const taskStore = useTaskStore()
-const { tasks, loading, favs, totalCount, favCount, paginatedTasks, currentPage, totalPages} = storeToRefs(taskStore)
+const { tasks, loading, favs, totalCount, favCount } = storeToRefs(taskStore)
 
 taskStore.loadTasks()
 
+const currentPage = ref(1)
+const tasksPerPage = ref(3)
+const { paginatedTasks, totalPages } = usePagination({
+  currentPage,
+  tasksPerPage, 
+  arrayToPaginate:tasks
+});
+
 const filter = ref('all');
-
-const prevPage = () => {
-  if (currentPage.value > 1) {
-    taskStore.setCurrentPage(currentPage.value - 1)
-  }
-}
-
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    taskStore.setCurrentPage(currentPage.value + 1)
-  }
-}
 </script>
 
 <template>
   <main>
-    <Header></Header>
+    <Header />
     <div class="new-task-form">
       <TaskForm/>
     </div>
@@ -53,7 +51,14 @@ const nextPage = () => {
 
     <div class="actions-wrapper">
       <button class="button-reset" @click="taskStore.$reset">Reset</button>
-      <div class="pagination-wrapper">
+      <pagination-component 
+        v-model="currentPage"
+        :currentPage="currentPage"
+        :tasksPerPage="tasksPerPage"
+        :totalPages="totalPages.value"
+       
+      />
+      <!-- <div class="pagination-wrapper">
         <button 
           @click="prevPage" 
           :disabled="currentPage === 1"
@@ -63,7 +68,7 @@ const nextPage = () => {
             @click="nextPage"
             :disabled="currentPage === totalPages"
           >Next page</button>
-      </div>      
+      </div>       -->
     </div>
   </main>
 </template>

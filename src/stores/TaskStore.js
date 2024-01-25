@@ -8,9 +8,9 @@ export const useTaskStore =  defineStore('taskStore', {
       // {id: 3, title: "walk the moon", isFav: false, isEdit: false},
       // {id: 4, title: "do cleaning", isFav: true, isEdit: false},
     ],
-    loading: false,
-    currentPage: 1,
-    tasksPerPage: 3
+    loading: false
+    // currentPage: 1,
+    // tasksPerPage: 3
   }),
   getters: {
     favs(){
@@ -21,17 +21,17 @@ export const useTaskStore =  defineStore('taskStore', {
         return c.isFav ? p + 1 : p
       }, 0)
     },
-    totalCount:(state) => {
-      return state.tasks.length
-    },
-    paginatedTasks: (state) => {
-      const startIndex = (state.currentPage - 1) * state.tasksPerPage
-      const endIndex = startIndex + state.tasksPerPage
-      return state.tasks.slice(startIndex, endIndex)
-    },
-    totalPages: (state) => {
-      return Math.ceil(state.tasks.length / state.tasksPerPage)
-    }
+    // totalCount:(state) => {
+    //   return state.tasks.length
+    // },
+    // paginatedTasks: (state) => {
+    //   const startIndex = (state.currentPage - 1) * state.tasksPerPage
+    //   const endIndex = startIndex + state.tasksPerPage
+    //   return state.tasks.slice(startIndex, endIndex)
+    // },
+    // totalPages: (state) => {
+    //   return Math.ceil(state.tasks.length / state.tasksPerPage)
+    // }
   },
   actions: {
     async loadTasks() {
@@ -111,9 +111,9 @@ export const useTaskStore =  defineStore('taskStore', {
         console.log(res.error);
       }   
       localStorage.setItem('tasks', JSON.stringify(this.tasks))
-    },
-    setCurrentPage(page){
-      this.currentPage = page;
-    },
+    }
+    // setCurrentPage(page){
+    //   this.currentPage = page;
+    // },
   }
 })

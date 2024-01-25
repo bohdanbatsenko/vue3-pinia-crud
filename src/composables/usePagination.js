@@ -1,0 +1,18 @@
+import { computed, ref } from "vue";
+
+export const usePagination = ({currentPage, tasksPerPage, arrayToPaginate}) => {
+  const paginatedTasks = computed(() => {
+    const startIndex = (currentPage.value - 1) * tasksPerPage.value
+    const endIndex = startIndex + tasksPerPage.value
+    return arrayToPaginate.value.slice(startIndex, endIndex)
+  })
+
+  const totalPages = () => {
+    return Math.ceil(arrayToPaginate.value.length / tasksPerPage.value)
+  }
+
+  return {
+    paginatedTasks,
+    totalPages,
+  }
+}
