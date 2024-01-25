@@ -14,14 +14,27 @@ const { tasks, loading, favs, totalCount, favCount } = storeToRefs(taskStore)
 taskStore.loadTasks()
 
 const currentPage = ref(1)
-const tasksPerPage = ref(3)
-const { paginatedTasks, totalPages } = usePagination({
+const tasksPerPage = 3
+
+const { paginatedTasks, totalPages } = usePagination(
   currentPage,
-  tasksPerPage, 
-  arrayToPaginate:tasks
-});
+  tasksPerPage,
+  tasks
+);
 
 const filter = ref('all');
+
+// const prevPage = () => {
+//   if (currentPage.value > 1) {
+//     setCurrentPage(currentPage.value - 1)
+//   }
+// }
+
+// const nextPage = () => {
+//   if (currentPage.value < totalPages.value) {
+//     setCurrentPage(currentPage.value + 1)
+//   }
+// }
 </script>
 
 <template>
@@ -51,11 +64,10 @@ const filter = ref('all');
 
     <div class="actions-wrapper">
       <button class="button-reset" @click="taskStore.$reset">Reset</button>
-      <pagination-component 
-        v-model="currentPage"
+      <PaginationComponent 
         :currentPage="currentPage"
-        :tasksPerPage="tasksPerPage"
-        :totalPages="totalPages.value"
+        :totalPages="totalPages"
+        @update:currentPage="currentPage = $event"
        
       />
       <!-- <div class="pagination-wrapper">
