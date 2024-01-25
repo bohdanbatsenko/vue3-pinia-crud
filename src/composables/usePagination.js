@@ -11,14 +11,10 @@ export const usePagination = (currentPage, tasksPerPage, arrayToPaginate) => {
   const totalPages = computed(() => {
     return Math.ceil(arrayToPaginate.value.length / tasksPerPage)
   })
-
-  // const setCurrentPage = (page) => {
-  //   currentPage.value = page;
-  // }
-
+  
   return {
     paginatedTasks,
     totalPages,
-    //setCurrentPage
+
   }
 }

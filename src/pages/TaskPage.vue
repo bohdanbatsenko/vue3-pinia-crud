@@ -24,17 +24,6 @@ const { paginatedTasks, totalPages } = usePagination(
 
 const filter = ref('all');
 
-// const prevPage = () => {
-//   if (currentPage.value > 1) {
-//     setCurrentPage(currentPage.value - 1)
-//   }
-// }
-
-// const nextPage = () => {
-//   if (currentPage.value < totalPages.value) {
-//     setCurrentPage(currentPage.value + 1)
-//   }
-// }
 </script>
 
 <template>

@@ -17,18 +17,20 @@ const props = defineProps({
   currentPage: { required: true },
   totalPages: { required: true },
 });
-const { currentPage, totalPages } = ref(props)
+
 const emit = defineEmits(["update:currentPage"])
 const setCurrentPage = (page) => {
-  currentPage = page
-  //emit("updateCurrentPage", page)
+  props.currentPage = page
+  emit("update:currentPage", page)
 }
 const prevPage = () => {
-  if(currentPage.value === 1) return;
-  emit("update:currentPage", currentPage.value - 1)
-}
+  if (props.currentPage > 1) {
+    emit('update:currentPage', props.currentPage - 1);
+  }
+};
 const nextPage = () => {
-  if(currentPage.value >= totalPages.value) return;
-  emit("update:currentPage", currentPage.value + 1)
-}
+  if (props.currentPage < props.totalPages) {
+    emit('update:currentPage', props.currentPage + 1);
+  }
+};
 </script>
