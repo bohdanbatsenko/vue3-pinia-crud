@@ -52,7 +52,6 @@ const nextPage = () => {
     </div>
 
     <div class="actions-wrapper">
-      <button class="button-reset" @click="taskStore.$reset">Reset</button>
       <div class="pagination-wrapper">
         <button 
           @click="prevPage" 
@@ -60,10 +59,27 @@ const nextPage = () => {
           >Prev page</button>
           <span class="current-page">Page {{ currentPage }} of {{ totalPages }}</span>
           <button
+            v-for="index in totalPages"
+            :key="index"
+            :aria-label="'go to page ' + index"
+            class="page-item"
+            :class="{
+                'active-page': currentPage === index,
+              }"
+            @click="taskStore.setCurrentPage(index)"
+            >
+            <span
+              class="page-link"
+            >
+              {{ index }}
+            </span>
+          </button>
+          <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
           >Next page</button>
-      </div>      
+      </div>
+      <button class="button-reset" @click="taskStore.$reset">Reset</button>   
     </div>
   </main>
 </template>
