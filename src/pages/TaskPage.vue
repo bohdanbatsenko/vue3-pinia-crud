@@ -61,7 +61,3 @@ const filter = ref('all');
     </div>
   </main>
 </template>
-
-<style scoped>
-  
-</style>
