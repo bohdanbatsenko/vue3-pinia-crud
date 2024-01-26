@@ -15,11 +15,7 @@
           }"
         @click="setCurrentPage(index)"
         >
-        <span
-          class="page-link"
-        >
-          {{ index }}
-        </span>
+        <span class="page-link">{{ index }}</span>
       </button>
       <button
         @click="nextPage"
@@ -36,17 +32,16 @@ const props = defineProps({
 
 const emit = defineEmits(["update:currentPage"])
 const setCurrentPage = (page) => {
-  props.currentPage = page
   emit("update:currentPage", page)
 }
 const prevPage = () => {
   if (props.currentPage > 1) {
-    emit('update:currentPage', props.currentPage - 1);
+    emit("update:currentPage", props.currentPage - 1);
   }
 };
 const nextPage = () => {
   if (props.currentPage < props.totalPages) {
-    emit('update:currentPage', props.currentPage + 1);
+    emit("update:currentPage", props.currentPage + 1);
   }
 };
 </script>

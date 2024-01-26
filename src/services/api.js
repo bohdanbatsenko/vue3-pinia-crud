@@ -1,28 +1,30 @@
 const baseUrl = 'http://localhost:3000/tasks'
 
-export const loadTasks = async () => {
+export const apiLoadTasks = async () => {
   try {
     const res = await fetch(baseUrl)
     const data = await res.json()
+    return data
   } catch(error) {
     console.error('Error fetching tasks:', error);
   }
 }
 
-export const addTask = async(task) => {
-  const res = await fetch(baseUrl, {
+export const apiAddTask = async(task) => {
+  try {
+    const res = await fetch(baseUrl, {
       method: 'POST',
       body: JSON.stringify(task),
       headers: {'Content-Type': 'application/json'}
-    }
-  )
-  if (res.error) {
-    console.log(res.error);
+      }
+    )
+  } catch(error) {
+    console.error('Error fetching tasks:', error);
   }
 }
 
-export const removeTask = async(id) => {
-  const res = await fetch(baseUrl + id, {
+export const apiRemoveTask = async(id) => {
+  const res = await fetch(baseUrl + '/' + id, {
       method: 'DELETE',
     }
   )
@@ -31,10 +33,10 @@ export const removeTask = async(id) => {
   }
 }
 
-export const toggleFav = async(id) => {
-  const res = await fetch(baseUrl + id, {
+export const apiToggleFav = async(id, task) => {
+  const res = await fetch(baseUrl + '/' + id, {
       method: 'PATCH',
-      body: JSON.stringify(id),
+      body: JSON.stringify(task),
       headers: {'Content-Type': 'application/json'}
     }
   )
@@ -43,14 +45,16 @@ export const toggleFav = async(id) => {
   }      
 }
 
-export const updateTask = async(id, updatedTask) =>{
-  const res = await fetch(baseUrl + id, {
-      method: 'PUT',
-      body: JSON.stringify(updatedTask),
-      headers: {'Content-Type': 'application/json'}
-    }
-  )
-  if (res.error) {
-    console.log(res.error);
-  }   
+export const apiUpdateTask = async(id, taskToUpdate) =>{
+  try {
+    const res = await fetch(baseUrl + '/' + id, {
+        method: 'PUT',
+        body: JSON.stringify(taskToUpdate),
+        headers: {'Content-Type': 'application/json'}
+      }
+    )
+
+  } catch(error) {
+    console.error('Error fetching tasks:', error);
+  }
 }

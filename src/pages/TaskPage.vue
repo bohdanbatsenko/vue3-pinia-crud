@@ -57,19 +57,7 @@ const filter = ref('all');
         :currentPage="currentPage"
         :totalPages="totalPages"
         @update:currentPage="currentPage = $event"
-       
       />
-      <!-- <div class="pagination-wrapper">
-        <button 
-          @click="prevPage" 
-          :disabled="currentPage === 1"
-          >Prev page</button>
-          <span class="current-page">Page {{ currentPage }} of {{ totalPages }}</span>
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-          >Next page</button>
-      </div>       -->
     </div>
   </main>
 </template>
