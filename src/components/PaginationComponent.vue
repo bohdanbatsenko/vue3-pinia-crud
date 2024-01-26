@@ -24,13 +24,13 @@
   </div>
 </template>
 <script setup>
-import { ref, toRefs } from 'vue';
 const props = defineProps({
   currentPage: { required: true },
   totalPages: { required: true },
 });
 
 const emit = defineEmits(["update:currentPage"])
+
 const setCurrentPage = (page) => {
   emit("update:currentPage", page)
 }
