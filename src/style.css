@@ -89,7 +89,7 @@ header h1 {
 }
 /* filter nav */
 .filter {
-  width: 640px;
+  max-width: 640px;
   margin: 10px auto;
   text-align: right;
 }
@@ -157,7 +157,7 @@ p.invalid {
   background: #ffd859;
 }
 .actions-wrapper {
-  width: 640px;
+  max-width: 640px;
   margin: 10px auto;
   text-align: center;
   display: flex;
