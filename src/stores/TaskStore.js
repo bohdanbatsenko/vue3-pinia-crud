@@ -85,7 +85,7 @@ export const useTaskStore =  defineStore('taskStore', {
     async toggleFav(id) {
       const task = this.tasks.find(t => t.id === id)
       task.isFav = !task.isFav
-
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
       const res = await fetch('http://localhost:3000/tasks/' + id, {
           method: 'PATCH',
           body: JSON.stringify({isFav: task.isFav}),

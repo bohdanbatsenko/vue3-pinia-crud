@@ -2,7 +2,8 @@
   "tasks": [
     {
       "title": "task 1 First",
-      "id": 6690
+      "id": 6690,
+      "isFav": false
     },
     {
       "title": "some t",
@@ -10,9 +11,9 @@
       "isFav": false
     },
     {
-      "title": "new task 02",
+      "title": "task 02",
       "id": 5984,
-      "isFav": false
+      "isFav": true
     },
     {
       "title": "task",
@@ -70,6 +71,12 @@
     {
       "title": "Task 13 -edit 1",
       "id": 2106
+    },
+    {
+      "title": "Task 14",
+      "isFav": true,
+      "id": 5162,
+      "isEdit": false
     }
   ]
 }
