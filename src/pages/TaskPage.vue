@@ -1,31 +1,3 @@
-<script setup>
-import {ref} from 'vue';
-import Header from '../components/Header.vue';
-import TaskForm from '../components/TaskForm.vue';
-import TaskDetails from '../components/TaskDetails.vue';
-import PaginationComponent from '../components/PaginationComponent.vue';
-import { useTaskStore } from '../stores/TaskStore';
-import { storeToRefs } from 'pinia';
-import { usePagination } from "../composables/usePagination";
-
-const taskStore = useTaskStore()
-const { tasks, loading, favs, totalCount, favCount } = storeToRefs(taskStore)
-
-taskStore.loadTasks()
-
-const currentPage = ref(1)
-const tasksPerPage = 3
-
-const { paginatedTasks, totalPages } = usePagination(
-  currentPage,
-  tasksPerPage,
-  tasks
-);
-
-const filter = ref('all');
-
-</script>
-
 <template>
   <main>
     <Header />
@@ -61,3 +33,32 @@ const filter = ref('all');
     </div>
   </main>
 </template>
+
+<script setup>
+import {ref} from 'vue';
+import Header from '../components/Header.vue';
+import TaskForm from '../components/TaskForm.vue';
+import TaskDetails from '../components/TaskDetails.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
+import { useTaskStore } from '../stores/TaskStore';
+import { storeToRefs } from 'pinia';
+import { usePagination } from "../composables/usePagination";
+
+const taskStore = useTaskStore()
+const { tasks, loading, favs, totalCount, favCount } = storeToRefs(taskStore)
+
+taskStore.loadTasks()
+
+const currentPage = ref(1)
+const tasksPerPage = 3
+
+const { paginatedTasks, totalPages } = usePagination(
+  currentPage,
+  tasksPerPage,
+  tasks
+);
+
+const filter = ref('all');
+
+</script>
+

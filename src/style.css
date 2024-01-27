@@ -169,7 +169,7 @@ p.invalid {
   max-width: 100px;
 }
 .actions-wrapper > .button-reset {
-  margin: 16px auto 0 auto;
+  margin: 0 auto 16px auto;
 }
 .pagination-wrapper .current-page {
   margin: 0 10px;
