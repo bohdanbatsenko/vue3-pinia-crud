@@ -1,34 +1,6 @@
-<script setup>
-import {ref} from 'vue';
-import Header from '../components/Header.vue';
-import TaskForm from '../components/TaskForm.vue';
-import TaskDetails from '../components/TaskDetails.vue';
-import { useTaskStore } from '../stores/TaskStore';
-import { storeToRefs } from 'pinia';
-
-const taskStore = useTaskStore()
-const { tasks, loading, favs, totalCount, favCount, paginatedTasks, currentPage, totalPages} = storeToRefs(taskStore)
-
-taskStore.loadTasks()
-
-const filter = ref('all');
-
-const prevPage = () => {
-  if (currentPage.value > 1) {
-    taskStore.setCurrentPage(currentPage.value - 1)
-  }
-}
-
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    taskStore.setCurrentPage(currentPage.value + 1)
-  }
-}
-</script>
-
 <template>
   <main>
-    <Header></Header>
+    <Header />
     <div class="new-task-form">
       <TaskForm/>
     </div>
@@ -52,38 +24,41 @@ const nextPage = () => {
     </div>
 
     <div class="actions-wrapper">
-      <div class="pagination-wrapper">
-        <button 
-          @click="prevPage" 
-          :disabled="currentPage === 1"
-          >Prev page</button>
-          <span class="current-page">Page {{ currentPage }} of {{ totalPages }}</span>
-          <button
-            v-for="index in totalPages"
-            :key="index"
-            :aria-label="'go to page ' + index"
-            class="page-item"
-            :class="{
-                'active-page': currentPage === index,
-              }"
-            @click="taskStore.setCurrentPage(index)"
-            >
-            <span
-              class="page-link"
-            >
-              {{ index }}
-            </span>
-          </button>
-          <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-          >Next page</button>
-      </div>
-      <button class="button-reset" @click="taskStore.$reset">Reset</button>   
+      <button class="button-reset" @click="taskStore.$reset">Reset</button>
+      <PaginationComponent 
+        :currentPage="currentPage"
+        :totalPages="totalPages"
+        @update:currentPage="currentPage = $event"
+      />
     </div>
   </main>
 </template>
 
-<style scoped>
-  
-</style>
+<script setup>
+import {ref} from 'vue';
+import Header from '../components/Header.vue';
+import TaskForm from '../components/TaskForm.vue';
+import TaskDetails from '../components/TaskDetails.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
+import { useTaskStore } from '../stores/TaskStore';
+import { storeToRefs } from 'pinia';
+import { usePagination } from "../composables/usePagination";
+
+const taskStore = useTaskStore()
+const { tasks, loading, favs, totalCount, favCount } = storeToRefs(taskStore)
+
+taskStore.loadTasks()
+
+const currentPage = ref(1)
+const tasksPerPage = 3
+
+const { paginatedTasks, totalPages } = usePagination(
+  currentPage,
+  tasksPerPage,
+  tasks
+);
+
+const filter = ref('all');
+
+</script>
+

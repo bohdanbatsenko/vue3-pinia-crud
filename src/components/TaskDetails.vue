@@ -58,11 +58,10 @@
     task.isEdit = true;
     initialTitle.value = task.title;
     await nextTick();
-    editInput.value.focus()
+    editInput.value.focus();
     updatedTask.value = task.title
   }
 
-  //taskStore.updateTask(task.id, updatedTask)
   const saveTask = (task) => {
     const id = task.id;
     task.title = updatedTask;
@@ -86,7 +85,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
